@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
-:root{
-    max-width: 1280px;
-    margin: 0 auto;
+:root {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+::-webkit-scrollbar {
+  display: none;
 }

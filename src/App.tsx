@@ -43,15 +43,15 @@ function App() {
   return (
     <main className='w-full h-dvh flex flex-col'>
       {/* Navbar */}
-      <div className="w-full h-16 border border-black flex items-center justify-center">
+      <div className="fixed top-0 w-full max-w-[1280px] h-16 p-2 border-b border-black bg-white flex items-center justify-center z-10">
         <span className="text-3xl text-red-500 font-mono font-black">f1<span className="text-black">GPT</span></span>
       </div>
 
       {/* chat section */}
-      <section className='flex flex-1 flex-col p-5'>
+      <section className='h-full mt-16 mb-20 overflow-y-auto p-5' style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
         <div className='h-full'>
           {noMessages ? (
-            <div className="h-full w-full flex flex-col justify-center ">
+            <div className="h-full w-full flex flex-col justify-center">
               <p className='p-2 font-mono font-bold text-balance text-center'>The Ultimate place for Formula One super fans! Ask F1GPT anything about the fanstatic topic of F1 racing and it will come back with the most up-to-date answers.</p>
               <br />
               {/* Prompt suggestions */}
@@ -61,21 +61,24 @@ function App() {
             :
             (
               // map messages onto chat bubbles
-              <div className='flex flex-col gap-2'>
-                {status == 'submitted' && <LoadingBubble />}
+              <div className='flex flex-col gap-4'>
                 {messages.map(message => (
                   <Bubble key={message.id} message={message} />
                 ))}
+                {status == 'submitted' && <LoadingBubble />}
               </div>
             )}
         </div>
+      </section>
 
-        {/* Form */}
-        <form className='w-full flex h-12 border-y-2 font-mono text-sm' onSubmit={handleSubmit}>
-          <input className='w-full p-5 outline-0  border-black' type="text" value={input} onChange={handleInputChange} placeholder="Ask me anything about f1..." />
+      {/* Form */}
+      <div className='fixed bottom-0 p-5 min-h-20 max-w-[1280px] w-full bg-white flex justify-center items-center z-10'>
+        <form className=' w-full flex h-12 border-y-2 font-mono text-sm' onSubmit={handleSubmit}>
+          <input className='w-full p-5 outline-none border-black' type="text" value={input} onChange={handleInputChange} placeholder="Ask me anything about f1..." />
           <input className='px-6 outline-0 bg-red-400 cursor-pointer hover:bg-red-500 ease-in duration-200' type="submit" />
         </form>
-      </section>
+      </div>
+
     </main>
   )
 }
