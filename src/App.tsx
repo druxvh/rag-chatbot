@@ -10,7 +10,6 @@ import LoadingBubble from './components/LoadingBubble';
 function App() {
   const { append, status, messages, input, handleInputChange, handleSubmit } = useChat({
     api: `${import.meta.env.VITE_BACKEND_SERVER_URL}/api/chat`,
-    initialMessages: [],
     onResponse: async (response) => {
       try {
         const data = await response.json();
@@ -30,8 +29,6 @@ function App() {
     }
   });
 
-  // const handleSubmit = async () => {}
-
   const noMessages = !messages || messages?.length === 0;
 
   const handlePrompt = (promptText: string) => {
@@ -42,7 +39,6 @@ function App() {
     }
     append(message)
   }
-
 
   return (
     <main className='w-full h-dvh flex flex-col'>
@@ -75,10 +71,7 @@ function App() {
         </div>
 
         {/* Form */}
-        <form className='w-full flex h-12 border-y-2 font-mono text-sm' onSubmit={(e) => {
-          e.preventDefault()
-          handleSubmit
-        }}>
+        <form className='w-full flex h-12 border-y-2 font-mono text-sm' onSubmit={handleSubmit}>
           <input className='w-full p-5 outline-0  border-black' type="text" value={input} onChange={handleInputChange} placeholder="Ask me anything about f1..." />
           <input className='px-6 outline-0 bg-red-400 cursor-pointer hover:bg-red-500 ease-in duration-200' type="submit" />
         </form>
